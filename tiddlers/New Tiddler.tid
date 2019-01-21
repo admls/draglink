@@ -1,0 +1,11 @@
+created: 20190118110653146
+modified: 20190119041209505
+tags: 
+title: New Tiddler
+type: text/vnd.tiddlywiki
+
+List 1 (with type:"div" and subtype:"div")
+<<list-draglinks tiddler:"List 1" type:"div" subtype:"div">>
+
+List 2
+<<list-draglinks tiddler:"List 2">>

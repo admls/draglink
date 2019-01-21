@@ -1,0 +1,61 @@
+created: 20190118005051425
+modified: 20190119041209412
+tags: 
+title: Droppable Lists
+type: text/vnd.tiddlywiki
+
+\define startactions()
+<$wikify name="actionT" text=<<actionTiddler>>>
+<$action-listops $tiddler=<<listTiddler>> $subfilter="-[<actionT>]"/>
+</$wikify>
+\end
+
+\define drop-actions()
+<$action-listops $tiddler=<<listTiddler>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+\end
+
+\define drop-at-end()
+<$action-listops $tiddler=<<listTiddler>> $subfilter="[<actionTiddler>]"/>
+\end
+
+<$button> Populate List Fields
+<$action-setfield $tiddler="List 1" $field="list" $value="TiddlerOne [[TiddlerTwo]] [[Tiddler Three]]"/>
+<$action-setfield $tiddler="List 2" $field="list" $value="TiddlerFour [[TiddlerFive]] [[Tiddler Six]]"/>
+</$button>
+
+List 1
+
+<$set name="listTiddler" value="List 1">
+<$list filter="[list<listTiddler>]">
+<$droppable actions=<<drop-actions>>>
+<div class="tc-droppable-placeholder">&nbsp;
+</div>
+<$draglink to=<<currentTiddler>> startactions=<<startactions>>>
+
+<$text text=<<currentTiddler>>/>
+</$draglink>
+</$droppable>
+</$list>
+</$set>
+
+List 2
+
+<$set name="listTiddler" value="List 2">
+<$list filter="[list<listTiddler>]">
+<$droppable actions=<<drop-actions>>>
+<div class="tc-droppable-placeholder">&nbsp;
+</div>
+<$draglink to=<<currentTiddler>> startactions=<<startactions>>>
+
+<$text text=<<currentTiddler>>/>
+</$draglink>
+</$droppable>
+</$list>
+<$droppable actions=<<drop-at-end>>>
+<div class="tc-droppable-placeholder">&nbsp;
+</div>
+<p>
+&nbsp;
+</p>
+</$droppable>
+</$set>

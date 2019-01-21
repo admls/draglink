@@ -1,0 +1,46 @@
+created: 20190118095236968
+modified: 20190119041209389
+tags: $:/tags/Macro
+title: list-draglinks
+type: text/vnd.tiddlywiki
+
+\define list-links-draggable-drop-actions()
+<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+\end
+
+\define drag-startactions()
+<$wikify name="actionT" text=<<actionTiddler>>>
+<$action-listops $tiddler=<<targetTiddler>> $subfilter="-[<actionT>]"/>
+</$wikify>
+\end
+
+\define list-draglinks(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate)
+<$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
+<$type$ class="$class$">
+<$list filter="[list[$tiddler$!!$field$]]">
+<$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""">
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
+<div>
+<$transclude tiddler="""$itemTemplate$""">
+<$draglink to={{!!title}} startactions=<<drag-startactions>>>
+<$transclude field="caption">
+<$view field="title"/>
+</$transclude>
+</$draglink>
+</$transclude>
+</div>
+</$droppable>
+</$list>
+<$tiddler tiddler="">
+<$droppable actions=<<list-links-draggable-drop-actions>> tag="div">
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
+<div style="height:0.5em;"/>
+</$droppable>
+</$tiddler>
+</$type$>
+</$vars>
+\end

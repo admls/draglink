@@ -1,0 +1,9 @@
+{
+	"title": "$:/plugins/admls/draglink",
+	"description": "A small plugin providing added drag n' drop functionality to links in TiddlyWiki.",
+	"author": "Adam Sherwood",
+	"version": "0.0.1",
+	"core-version": ">=5.1.19",
+	"source": "https://github.com/admls/draglink",
+	"plugin-type": "plugin"
+}

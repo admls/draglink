@@ -1,0 +1,12 @@
+created: 20190119023931991
+modified: 20190119041209480
+tags: 
+title: DragLink Macros Examples
+type: text/vnd.tiddlywiki
+
+List 1 (with type:"div" and subtype:"div")
+<$macrocall $name="list-d-links" tiddler="List 1" type="div" subtype="div" startactions=<<drag-startactions>>/>
+
+List 2
+<$macrocall $name="list-d-links" tiddler="List 2" startactions=<<drag-startactions>>/>
+
