@@ -1,0 +1,41 @@
+created: 20190117004907242
+modified: 20190122012118407
+tags: 
+title: Remove by Drag Example
+type: text/vnd.tiddlywiki
+
+\define startactions()
+<$wikify name="actionT" text=<<actionTiddler>>>
+<$action-listops $tiddler="Demo List 1" $subfilter="-[<actionT>]"/>
+</$wikify>
+\end
+
+\define moreactions()
+<$wikify name="actionT" text=<<actionTiddler>>>
+<$action-listops $tiddler="Demo List 2" $subfilter="-[<actionT>]"/>
+</$wikify>
+\end
+
+{{Repopulate List Fields}}
+
+!!Drag the links and watch them disappear from the lists!
+
+Demo List 1
+
+<$list filter="[list[Demo List 1]]">
+<div>
+<$draglink to=<<currentTiddler>> startactions=<<startactions>>>
+<$text text=<<currentTiddler>>/>
+</$draglink>
+</div>
+</$list>
+
+Demo List 2
+
+<$list filter="[list[Demo List 2]]">
+<div>
+<$draglink to=<<currentTiddler>> startactions=<<moreactions>>>
+<$text text=<<currentTiddler>>/>
+</$draglink>
+</div>
+</$list>

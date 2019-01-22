@@ -1,0 +1,20 @@
+created: 20190119025112674
+detect-drag: Nothing listed in this tiddler is being dragged at the moment.
+modified: 20190122010702574
+tags: 
+title: List-DragTagged Macro Examples
+type: text/vnd.tiddlywiki
+
+\define dractions()
+<$action-setfield $tiddler="List-DragTagged Macro Examples" detect-drag="Something in this tiddler is being dragged!"/>
+\end
+
+\define endtions()
+<$action-setfield $tiddler="List-DragTagged Macro Examples" detect-drag="Nothing listed in this tiddler is being dragged at the moment."/>
+\end
+
+Try rearranging the order of the tags in this list and watch what happens!
+
+!!{{!!detect-drag}}
+
+<$macrocall $name="list-dragtagged" tag="$:/tags/Macro" startactions=<<dractions>> endactions=<<endtions>>/>

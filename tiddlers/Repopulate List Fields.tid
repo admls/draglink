@@ -1,0 +1,10 @@
+created: 20190122003619121
+modified: 20190122005650009
+tags: 
+title: Repopulate List Fields
+type: text/vnd.tiddlywiki
+
+<$button> Repopulate List Fields
+<$action-setfield $tiddler="Demo List 1" $field="list" $value="TiddlerOne [[TiddlerTwo]] [[Tiddler Three]]"/>
+<$action-setfield $tiddler="Demo List 2" $field="list" $value="TiddlerFour [[TiddlerFive]] [[Tiddler Six]]"/>
+</$button>

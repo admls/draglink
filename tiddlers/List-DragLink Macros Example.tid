@@ -1,0 +1,16 @@
+created: 20190119023931991
+modified: 20190122012337742
+tags: 
+title: List-DragLink Macros Example
+type: text/vnd.tiddlywiki
+
+Drag links from one list to another. Remove them from their respective lists by dropping them somewhere outside a droppable placeholder.
+
+{{Repopulate List Fields}}
+
+Demo List 1 (with type:"div" and subtype:"div")
+<$macrocall $name="list-draglinks" tiddler="Demo List 1" type="div" subtype="div" startactions=<<remove-from-list>>/>
+
+Demo List 2 (with defaults type:"ul" and subtype:"li")
+<$macrocall $name="list-draglinks" tiddler="Demo List 2" startactions=<<remove-from-list>>/>
+

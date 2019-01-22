@@ -1,28 +1,16 @@
 created: 20190119023525901
-modified: 20190119041209495
+modified: 20190122012300909
 tags: $:/tags/Macro
 title: DragLink Macros
 type: text/vnd.tiddlywiki
 
-\define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage)
-<$type$ class="$class$">
-<$list filter="$filter$" emptyMessage=<<__emptyMessage__>>>
-<$subtype$>
-<$link to={{!!title}}>
-<$transclude field="caption">
-<$view field="title"/>
-</$transclude>
-</$link>
-</$subtype$>
-</$list>
-</$type$>
+\define remove-from-list()
+<$wikify name="actionT" text=<<actionTiddler>>>
+<$action-listops $tiddler=<<targetTiddler>> $subfilter="-[<actionT>]"/>
+</$wikify>
 \end
 
-\define list-links-draggable-drop-actions()
-<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
-\end
-
-\define list-d-links(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate,startactions,endactions)
+\define list-draglinks(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate,startactions,endactions)
 <$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
 <$type$ class="$class$">
 <$list filter="[list[$tiddler$!!$field$]]">
@@ -53,29 +41,7 @@ type: text/vnd.tiddlywiki
 </$vars>
 \end
 
-\define list-tagged-draggable-drop-actions(tag)
-<!-- Save the current ordering of the tiddlers with this tag -->
-<$set name="order" filter="[<__tag__>tagging[]]">
-<!-- Remove any list-after or list-before fields from the tiddlers with this tag -->
-<$list filter="[<__tag__>tagging[]]">
-<$action-deletefield $field="list-before"/>
-<$action-deletefield $field="list-after"/>
-</$list>
-<!-- Save the new order to the Tag Tiddler -->
-<$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore:currentTiddler<actionTiddler>]"/>
-<!-- Make sure the newly added item has the right tag -->
-<!-- Removing this line makes dragging tags within the dropdown work as intended -->
-<!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->
-<!-- Using the following 5 lines as replacement makes dragging titles from outside into the dropdown apply the tag -->
-<$list filter="[<actionTiddler>!contains:tags<__tag__>]">
-<$fieldmangler tiddler=<<actionTiddler>>>
-<$action-sendmessage $message="tm-add-tag" $param=<<__tag__>>/>
-</$fieldmangler>
-</$list>
-</$set>
-\end
-
-\define list-d-tagged(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",startactions,endactions)
+\define list-dragtagged(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",startactions,endactions)
 <$set name="tag" value=<<__tag__>>>
 <$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
 <$elementTag$ class="tc-menu-list-item">
